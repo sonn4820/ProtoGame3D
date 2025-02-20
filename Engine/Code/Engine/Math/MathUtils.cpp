@@ -326,6 +326,13 @@ bool DoDiscsOverlap2D(Vec2 const& centerA, float radiusA, Vec2 const& centerB, f
 	float distanceSquaredTwoCenters = GetDistanceSquared2D(centerA, centerB);
 	return distanceSquaredTwoCenters < (radiusA + radiusB) * (radiusA + radiusB);
 }
+
+bool DoDiscOverlapCapsule2D(Vec2 const& center, float radius, Capsule2 const& capsule)
+{
+	Vec2 nearestPoint = GetNearestPointOnLineSegment2D(center, capsule.m_start, capsule.m_end);
+	return DoDiscsOverlap2D(center, radius, nearestPoint, capsule.m_radius);
+}
+
 bool DoAABBsOverlap3D(AABB3 const& boxA, AABB3 const& boxB)
 {
 	if (boxA.m_maxs.x <= boxB.m_mins.x || boxA.m_mins.x >= boxB.m_maxs.x)

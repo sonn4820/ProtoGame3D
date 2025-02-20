@@ -1,4 +1,6 @@
 #pragma once
+#include "Engine/Math/MathUtils.hpp"
+#include "Engine/Core/VertexUtils.hpp"
 #include <vector>
 
 enum class eBufferEndian
@@ -15,12 +17,40 @@ class BufferWriter
 
 	void AppendByte(unsigned char b);
 	void AppendChar(char c);
-	void AppendUShort16(unsigned short u);
-	void AppendShort16(short s);
-	void AppendUInt16(unsigned int u);
-	void AppendInt16(int i);
+	void AppendUShort(unsigned short u);
+	void AppendShort(short s);
+	void AppendUInt(unsigned int u);
+	void AppendInt(int i);
+	void AppendUInt64(uint64_t u);
+	void AppendInt64(int64_t i);
 	void AppendFloat(float f);
 	void AppendDouble(double d);
+
+	void AppendString(const char* c);
+	void AppendString(unsigned int length, const char* c);
+
+	void AppendVec2(Vec2 v);
+	void AppendVec3(Vec3 v);
+	void AppendVec4(Vec4 v);
+
+	void AppendIntVec2(IntVec2 iv);
+	void AppendIntVec3(IntVec3 iv);
+
+	void AppendRgba8(Rgba8 color);
+	void AppendRgb8(Rgba8 color);
+
+	void AppendAABB2(AABB2 box);
+	void AppendAABB3(AABB3 box);
+
+	void AppendOBB2(OBB2 box);
+	void AppendOBB3(OBB3 box);
+
+	void AppendPlane2(Plane2 box);
+	void AppendPlane3(Plane3 box);
+
+	void AppendVertexPCU(Vertex_PCU box);
+	void AppendVertexPCUTBN(Vertex_PCUTBN box);
+
 	bool m_isOppositeEndianessFromNative = false;
 };
 

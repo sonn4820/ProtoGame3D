@@ -105,6 +105,7 @@ bool IsPointInsideOrientedSector2D(Vec2 const& point, Vec2 const& sectorTip, flo
 bool IsPointInsideDirectedSector2D(Vec2 const& point, Vec2 const& sectorTip, Vec2 const& sectorForwardNormal, float sectorApertureDegrees, float sectorRadius);
 
 bool DoDiscsOverlap2D(Vec2 const& centerA, float radiusA, Vec2 const& centerB, float radiusB);
+bool DoDiscOverlapCapsule2D(Vec2 const& center, float radius, Capsule2 const& capsule);
 bool DoAABBsOverlap2D(AABB2 const& boxA, AABB2 const& boxB);
 bool DoCapsuleAndPlaneOverlap2D(Capsule2 const& capsule, Vec2 planeStart, Vec2 planeEnd);
 

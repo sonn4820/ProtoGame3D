@@ -5,12 +5,7 @@
 
 Game::Game()
 {
-	m_player = new Player(this);
-	m_player->m_position = Vec3(0.f, 0.f, 0.f);
-	m_player->m_orientationDegrees = EulerAngles(0.f, 0.f, 0.f);
-	m_entityList.push_back((Entity*)m_player);
-	m_screenCamera.SetOrthographicView(Vec2(0, 0), Vec2(g_gameConfigBlackboard.GetValue("screenSizeX", 1600.f), g_gameConfigBlackboard.GetValue("screenSizeY", 800.f)));
-	m_clock = new Clock(*Clock::s_theSystemClock);
+
 
 }
 //..............................
@@ -21,6 +16,13 @@ Game::~Game()
 //..............................
 void Game::Startup()
 {
+	m_player = new Player(this);
+	m_player->m_position = Vec3(0.f, 0.f, 0.f);
+	m_player->m_orientationDegrees = EulerAngles(0.f, 0.f, 0.f);
+	m_entityList.push_back((Entity*)m_player);
+	m_screenCamera.SetOrthographicView(Vec2(0, 0), Vec2(g_gameConfigBlackboard.GetValue("screenSizeX", 1600.f), g_gameConfigBlackboard.GetValue("screenSizeY", 800.f)));
+	m_clock = new Clock(*Clock::s_theSystemClock);
+
 	SwitchState(GameState::ATTRACT_MODE);
 	m_cubeColorTimer = new Timer(2.f, m_clock);
 	m_cubeColorTimer->Start();
@@ -191,9 +193,9 @@ void Game::RenderPlayMode() const
 	g_theRenderer->BeginCamera(*m_player->GetCamera());
 	g_theRenderer->SetRasterizerMode(RasterizerMode::SOLID_CULL_BACK);
 	g_theRenderer->SetDepthStencilMode(DepthMode::ENABLED);
-	for (size_t i = 0; i < m_entityList.size(); i++)
+	for (auto i : m_entityList)
 	{
-		m_entityList[i]->Render();
+		i->Render();
 	}
 
 	DrawGrid();
